@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RestService } from '../provider/rest.service'
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +8,31 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  name: string;
+  age: string;
+  email: string;
+  id: number;
 
+  public userarray;
+  constructor(public navCtrl: NavController, public restService: RestService) {
+    this.userarray = this.restService.getUser()
+  }
+
+  actionclickpost() {
+    this.restService.postUser(this.name, this.age, this.email)
+    console.log('Add')
+
+  }
+
+  actionclickdelete() {
+    this.restService.deleteUser(this.id)
+    console.log('Delete')
+  }
+
+ 
 }
+
+
+
+
+
